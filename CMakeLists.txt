@@ -7,6 +7,8 @@ SET(MSVC_INCREMENTAL_DEFAULT ON)
 PROJECT(BULLET_PHYSICS)
 FILE (STRINGS "VERSION" BULLET_VERSION)
 
+INCLUDE(GNUInstallDirs)
+
 IF(COMMAND cmake_policy)
    cmake_policy(SET CMP0003 NEW)
    if(POLICY CMP0042)
@@ -466,11 +468,10 @@ IF(INSTALL_LIBS)
 		ENDIF (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER 2.5)
 	ENDIF(BUILD_EXTRAS)
 
-	SET (LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" )
-	SET (LIB_DESTINATION "lib${LIB_SUFFIX}" CACHE STRING "Library directory name")
+	SET (LIB_DESTINATION ${CMAKE_INSTALL_LIBDIR} CACHE STRING "Library directory name")
 	## the following are directories where stuff will be installed to
-	SET(INCLUDE_INSTALL_DIR "include/bullet/" CACHE PATH "The subdirectory to the header prefix")
-	SET(PKGCONFIG_INSTALL_PREFIX "lib${LIB_SUFFIX}/pkgconfig/" CACHE STRING "Base directory for pkgconfig files")
+	SET(INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_INCLUDEDIR}/bullet/" CACHE PATH "The subdirectory to the header prefix")
+	SET(PKGCONFIG_INSTALL_PREFIX "${CMAKE_INSTALL_LIBDIR}/pkgconfig/" CACHE STRING "Base directory for pkgconfig files")
 	IF(NOT MSVC)
 	  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/bullet.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/bullet.pc @ONLY)
   	INSTALL(
@@ -489,7 +490,7 @@ IF (BUILD_UNIT_TESTS)
 	SUBDIRS(test)
 ENDIF()
 
-set (BULLET_CONFIG_CMAKE_PATH lib${LIB_SUFFIX}/cmake/bullet )
+set (BULLET_CONFIG_CMAKE_PATH ${CMAKE_INSTALL_LIBDIR}/cmake/bullet )
 list (APPEND BULLET_DEFINITIONS ${BULLET_DOUBLE_DEF})
 list (APPEND BULLET_LIBRARIES LinearMath)
 list (APPEND BULLET_LIBRARIES Bullet3Common)

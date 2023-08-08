@@ -37,9 +37,9 @@ IF (INSTALL_EXTRA_LIBS)
 				INSTALL(TARGETS HACD DESTINATION .)
 			ELSE (APPLE AND BUILD_SHARED_LIBS AND FRAMEWORK)
 				INSTALL(TARGETS HACD
-                                        RUNTIME DESTINATION bin
-                                        LIBRARY DESTINATION lib${LIB_SUFFIX}
-                                        ARCHIVE DESTINATION lib${LIB_SUFFIX})
+                                        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+                                        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                                        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 				INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 					DESTINATION ${INCLUDE_INSTALL_DIR} FILES_MATCHING PATTERN "*.h" PATTERN "*.inl" PATTERN
