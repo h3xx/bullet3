@@ -1,7 +1,7 @@
 prefix=@CMAKE_INSTALL_PREFIX@
 exec_prefix=${prefix}
-libdir=${exec_prefix}/@LIB_DESTINATION@
-includedir=${prefix}/@INCLUDE_INSTALL_DIR@
+libdir=@CMAKE_INSTALL_FULL_LIBDIR@
+includedir=@CMAKE_INSTALL_FULL_INCLUDEDIR@
 
 Name: bullet
 Description: Bullet Continuous Collision Detection and Physics Library
